@@ -4,5 +4,5 @@ public interface PasswordGenerator {
 
     String generatePassword();
 
-    Boolean isValidPassword();
+    Boolean isValidPassword(String password);
 }
