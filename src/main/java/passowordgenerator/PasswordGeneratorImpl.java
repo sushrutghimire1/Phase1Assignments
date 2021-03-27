@@ -1,13 +1,12 @@
 package passowordgenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class PasswordGeneratorImpl implements PasswordGenerator {
     final private ArrayList<Character> symbols = new ArrayList<>();
-    String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String specialCharacters = "_$#%";
-    String numbers = "1234567890";
 
     public PasswordGeneratorImpl() {
         symbols.add('_');
@@ -18,16 +17,47 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
 
     @Override
     public String generatePassword() {
-        Random random = new Random();
-        String randomPassword = "";
-        randomPassword += specialCharacters.charAt(random.nextInt(specialCharacters.length()));
-        randomPassword += numbers.charAt(random.nextInt(numbers.length()));
-        randomPassword += capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
-        randomPassword += numbers.charAt(random.nextInt(numbers.length()));
-        randomPassword += capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
-        randomPassword += specialCharacters.charAt(random.nextInt(specialCharacters.length()));
-        return randomPassword;
+        int sizeOfPassword = 6;
+        return randomizePassword(sizeOfPassword);
     }
+
+    private String randomizePassword(int numberOfKeywords) {
+        Random random = new Random();
+        char[] password = new char[numberOfKeywords];
+        HashMap<Integer, Character> map = new HashMap<>();
+        for (PasswordSpecification passwordSpecification : PasswordSpecification.values()) {
+            int randomNumber, nextPosition;
+            do {
+                randomNumber = random.nextInt(numberOfKeywords);
+                nextPosition = randomNumber + 3 >= numberOfKeywords ? (randomNumber + 3) % numberOfKeywords : randomNumber + 3;
+            }
+            while (map.containsKey(randomNumber) || map.containsKey(nextPosition));
+
+            if (passwordSpecification.equals(PasswordSpecification.SYMBOLS)) {
+                String specialCharacters = "_$#%";
+                map.put(randomNumber, specialCharacters.charAt(random.nextInt(specialCharacters.length())));
+                map.put(nextPosition, specialCharacters.charAt(random.nextInt(specialCharacters.length())));
+            }
+
+            if (passwordSpecification.equals(PasswordSpecification.NUMBERS)) {
+                String numbers = "1234567890";
+                map.put(randomNumber, numbers.charAt(random.nextInt(numbers.length())));
+                map.put(nextPosition, numbers.charAt(random.nextInt(numbers.length())));
+            }
+
+            if (passwordSpecification.equals(PasswordSpecification.UPPERCASE)) {
+                String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                map.put(randomNumber, capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length())));
+                map.put(nextPosition, capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length())));
+            }
+
+        }
+        for (Map.Entry<Integer, Character> mapEntry : map.entrySet()) {
+            password[mapEntry.getKey()] = mapEntry.getValue();
+        }
+        return String.valueOf(password);
+    }
+
 
     @Override
     public Boolean isValidPassword(String password) {
@@ -51,9 +81,11 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
             return false;
         }
         for (Character symbol : symbols) {
-            if (password.contains(symbol.toString())) {
-                numberOfSymbols++;
-            }
+            char[] arr = password.toCharArray();
+            for (int i = 0; i < password.length(); i++)
+                if (arr[i] == symbol) {
+                    numberOfSymbols++;
+                }
         }
         if (numberOfSymbols != 2)
             return false;
