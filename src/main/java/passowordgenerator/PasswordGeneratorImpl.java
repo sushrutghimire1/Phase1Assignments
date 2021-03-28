@@ -17,8 +17,8 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
 
     @Override
     public String generatePassword() {
-        int sizeOfPassword = 6;
-        return randomizePassword(sizeOfPassword);
+        int numberOfKeywords = 6;
+        return randomizePassword(numberOfKeywords);
     }
 
     private String randomizePassword(int numberOfKeywords) {

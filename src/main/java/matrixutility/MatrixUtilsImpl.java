@@ -6,86 +6,86 @@ import matrixutility.exceptions.MatrixDimensionInvalidException;
 public class MatrixUtilsImpl implements MatrixUtils {
     @Override
     public int[][] scalarMultiplyMatrices(int number, int[][] matrix) {
-        int[][] resultant = new int[matrix.length][matrix[0].length];
+        int[][] resultantMatrix = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                resultant[i][j] = number * matrix[i][j];
+                resultantMatrix[i][j] = number * matrix[i][j];
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override
     public int[][] transportMatrix(int[][] matrix) {
-        int[][] resultant = new int[matrix[0].length][matrix.length];
+        int[][] resultantMatrix = new int[matrix[0].length][matrix.length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                resultant[j][i] = matrix[i][j];
+                resultantMatrix[j][i] = matrix[i][j];
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override
     public int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
         if (matrix1[0].length != matrix2[0].length || matrix1.length != matrix2.length)
             throw new MatrixDimensionInvalidException();
-        int[][] resultant = new int[matrix1.length][matrix1[0].length];
+        int[][] resultantMatrix = new int[matrix1.length][matrix1[0].length];
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix1[0].length; j++) {
-                resultant[i][j] = matrix1[i][j] + matrix2[i][j];
+                resultantMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override
     public int[][] multiplyMatrices(int[][] matrix1, int[][] matrix2) {
         if (matrix1[0].length != matrix2.length)
             throw new MatrixDimensionInvalidException();
-        int[][] resultant = new int[matrix1.length][matrix2[0].length];
+        int[][] resultantMatrix = new int[matrix1.length][matrix2[0].length];
         for (int i = 0; i < matrix1.length; i++) {
             for (int j = 0; j < matrix2[0].length; j++) {
-                resultant[i][j] = 0;
+                resultantMatrix[i][j] = 0;
                 for (int k = 0; k < matrix2.length; k++) {
-                    resultant[i][j] += matrix1[i][k] * matrix2[k][j];
+                    resultantMatrix[i][j] += matrix1[i][k] * matrix2[k][j];
                 }
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override
     public int[][] getSubMatrix(int[][] matrix, int rowToDelete, int columnToDelete) {
         if (rowToDelete > matrix.length || columnToDelete > matrix[0].length || rowToDelete < 0 || columnToDelete < 0)
             throw new MatrixDimensionInvalidException();
-        int[][] resultant = new int[matrix.length - 1][matrix[0].length - 1];
+        int[][] resultantMatrix = new int[matrix.length - 1][matrix[0].length - 1];
         int row = -1, column;
         for (int i = 0; i < matrix.length; i++) {
             row++;
             column = 0;
             for (int j = 0; j < matrix[0].length; j++) {
                 if (i != rowToDelete - 1 && j != columnToDelete - 1) {
-                    resultant[row][column++] = matrix[i][j];
+                    resultantMatrix[row][column++] = matrix[i][j];
                 }
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override
     public int[][] getDiagonalMatrix(int[][] matrix) {
         if (matrix.length != matrix[0].length)
             throw new MatrixDimensionInvalidException();
-        int[][] resultant = new int[matrix.length][matrix[0].length];
+        int[][] resultantMatrix = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (i == j)
-                    resultant[i][j] = matrix[i][j];
-                else resultant[i][j] = 0;
+                    resultantMatrix[i][j] = matrix[i][j];
+                else resultantMatrix[i][j] = 0;
             }
         }
-        return resultant;
+        return resultantMatrix;
 
     }
 
@@ -93,21 +93,21 @@ public class MatrixUtilsImpl implements MatrixUtils {
     public int[][] getTriangularMatrix(int[][] matrix, boolean isUpper) {
         if (matrix.length != matrix[0].length)
             throw new MatrixDimensionInvalidException();
-        int[][] resultant = new int[matrix.length][matrix[0].length];
+        int[][] resultantMatrix = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (isUpper) {
                     if (i <= j)
-                        resultant[i][j] = matrix[i][j];
-                    else resultant[i][j] = 0;
+                        resultantMatrix[i][j] = matrix[i][j];
+                    else resultantMatrix[i][j] = 0;
                 } else {
                     if (i >= j)
-                        resultant[i][j] = matrix[i][j];
-                    else resultant[i][j] = 0;
+                        resultantMatrix[i][j] = matrix[i][j];
+                    else resultantMatrix[i][j] = 0;
                 }
             }
         }
-        return resultant;
+        return resultantMatrix;
     }
 
     @Override

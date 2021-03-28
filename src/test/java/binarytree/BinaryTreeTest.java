@@ -1,21 +1,22 @@
 package binarytree;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class BinaryTreeTest {
+import static org.junit.Assert.assertEquals;
 
-    private BinaryTree binaryTree;
+public class BinaryTreeTest {
 
-    @BeforeEach
-    void testBinaryTree(){
-        binaryTree=new BinaryTreeImpl();
+    private static BinaryTree binaryTree;
+
+    @BeforeClass
+    public static void testBinaryTree() {
+        binaryTree = new BinaryTreeImpl();
     }
 
-    @Test
-    void testNode() {
+   @Test
+    public void testNode() {
         binaryTree.accept(10);
         binaryTree.accept(6);
         binaryTree.accept(18);
@@ -29,7 +30,7 @@ class BinaryTreeTest {
     }
 
     @Test
-    void testDepth() {
+    public void testDepth() {
         binaryTree.accept(10);
         binaryTree.accept(6);
         binaryTree.accept(18);

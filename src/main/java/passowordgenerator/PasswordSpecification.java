@@ -12,7 +12,4 @@ public enum PasswordSpecification {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
 }
