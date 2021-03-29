@@ -63,6 +63,26 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
     public Boolean isValidPassword(String password) {
         if (password.length() != 6)
             return false;
+        Boolean x = containsValidElements(password);
+        if (x != null) return x;
+        char[] passwordArray = password.toCharArray();
+        for (int i = 0; i < passwordArray.length - 1; i++) {
+            if (Character.isDigit(passwordArray[i]) && Character.isDigit(passwordArray[i + 1])) {
+                return false;
+            }
+            if (Character.isUpperCase(passwordArray[i]) && Character.isUpperCase(passwordArray[i + 1])) {
+                return false;
+            }
+            for (Character symbol : symbols) {
+                if (passwordArray[i] == symbol && passwordArray[i + 1] == symbol) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Boolean containsValidElements(String password) {
         int numberOfDigits = 0;
         int numberOfUppercase = 0;
         int numberOfSymbols = 0;
@@ -89,20 +109,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
         }
         if (numberOfSymbols != 2)
             return false;
-        char[] passwordArray = password.toCharArray();
-        for (int i = 0; i < passwordArray.length - 1; i++) {
-            if (Character.isDigit(passwordArray[i]) && Character.isDigit(passwordArray[i + 1])) {
-                return false;
-            }
-            if (Character.isUpperCase(passwordArray[i]) && Character.isUpperCase(passwordArray[i + 1])) {
-                return false;
-            }
-            for (Character symbol : symbols) {
-                if (passwordArray[i] == symbol && passwordArray[i + 1] == symbol) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return null;
     }
 }

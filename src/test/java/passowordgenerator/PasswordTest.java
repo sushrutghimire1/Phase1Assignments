@@ -11,6 +11,7 @@ public class PasswordTest {
     @Test
     public void shouldThrowErrorWhenNotValid() {
         String random = passwordGenerator.generatePassword();
+        System.out.println(random);
         assertTrue(passwordGenerator.isValidPassword(random));
     }
 }

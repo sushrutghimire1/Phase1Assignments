@@ -7,7 +7,7 @@ public class DynamicLinkedListStackImpl implements Stack {
     private final LinkedList<String> stack;
 
     public DynamicLinkedListStackImpl() {
-        stack = new LinkedList<String>();
+        stack = new LinkedList<>();
     }
 
     @Override
@@ -28,15 +28,5 @@ public class DynamicLinkedListStackImpl implements Stack {
     @Override
     public int size() {
         return stack.size();
-    }
-
-    public boolean isEmpty() {
-        return stack.isEmpty();
-    }
-
-    public void printStack() {
-        for (String s : stack) {
-            System.out.println(s);
-        }
     }
 }
