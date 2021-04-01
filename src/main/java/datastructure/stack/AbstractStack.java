@@ -1,23 +1,14 @@
-package datastructure;
+package datastructure.stack;
 
 
-import datastructure.exceptions.StackOverFlowException;
 import datastructure.exceptions.StackUnderFlowException;
 
-public class FixedArrayStackImpl implements Stack {
+public abstract class AbstractStack implements Stack {
+    protected String[] stack;
+    protected int top;
 
-    private final String[] stack;
-    private int top;
-
-    public FixedArrayStackImpl(int capacity) {
+    public AbstractStack(int capacity) {
         stack = new String[capacity];
-    }
-
-    @Override
-    public void push(String element) {
-        if (top == stack.length)
-            throw new StackOverFlowException();
-        stack[top++] = element;
     }
 
     @Override
@@ -50,4 +41,5 @@ public class FixedArrayStackImpl implements Stack {
             System.out.println(stack[i]);
         }
     }
+
 }

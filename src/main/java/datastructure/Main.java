@@ -1,5 +1,10 @@
 package datastructure;
 
+import datastructure.queue.DynamicArrayQueueImpl;
+import datastructure.queue.FixedArrayQueueImpl;
+import datastructure.stack.DynamicArrayStackImpl;
+import datastructure.stack.FixedArrayStackImpl;
+
 public class Main {
 
     public static void main(String[] args) {

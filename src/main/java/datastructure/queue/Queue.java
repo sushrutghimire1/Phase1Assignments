@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.queue;
 
 public interface Queue {
     void enqueue(String element);

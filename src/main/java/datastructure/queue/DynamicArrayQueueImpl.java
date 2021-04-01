@@ -1,8 +1,6 @@
-package datastructure;
+package datastructure.queue;
 
 public class DynamicArrayQueueImpl extends AbstractQueue {
-
-
     public DynamicArrayQueueImpl(int capacity) {
         super(capacity);
     }
@@ -14,7 +12,6 @@ public class DynamicArrayQueueImpl extends AbstractQueue {
             System.arraycopy(queue, 0, newArray, 0, queue.length);
             queue = newArray;
         }
-
         queue[back] = element;
         back++;
     }

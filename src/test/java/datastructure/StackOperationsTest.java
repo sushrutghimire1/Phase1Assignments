@@ -1,5 +1,7 @@
 package datastructure;
 
+import datastructure.stack.DynamicArrayStackImpl;
+import datastructure.stack.DynamicLinkedListStackImpl;
 import org.junit.Test;
 
 public class StackOperationsTest {
