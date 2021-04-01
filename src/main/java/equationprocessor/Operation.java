@@ -2,5 +2,5 @@ package equationprocessor;
 
 @FunctionalInterface
 public interface Operation {
-    int apply(int a, int b);
+    double apply(double a, double b);
 }

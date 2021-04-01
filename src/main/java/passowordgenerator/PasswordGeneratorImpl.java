@@ -28,7 +28,8 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
             do {
                 firstPosition = random.nextInt(numberOfKeywords);
                 secondPosition = firstPosition + 3;
-                secondPosition = secondPosition >= numberOfKeywords ? (secondPosition) % numberOfKeywords : secondPosition;
+                secondPosition = secondPosition >= numberOfKeywords ?
+                        (secondPosition) % numberOfKeywords : secondPosition;
             }
             while (map.containsKey(firstPosition) || map.containsKey(secondPosition));
 
@@ -51,10 +52,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
     public Boolean isValidPassword(String password) {
         if (password.length() != numberOfKeywords)
             return false;
-        return containsValidElements(password);
-    }
-
-    private Boolean containsValidElements(String password) {
         int numberOfDigits = 0, numberOfUppercase = 0, numberOfSymbols = 0;
         for (char c : password.toCharArray()) {
             if (Character.isDigit(c))

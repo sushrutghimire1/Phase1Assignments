@@ -5,28 +5,28 @@ import java.util.stream.Stream;
 
 public enum AllowedOperation implements Operation {
     PLUS("+", 1) {
-        public int apply(int a, int b) {
+        public double apply(double a, double b) {
             return a+b;
         }
     },
     MINUS("-", 1) {
-        public int apply(int a, int b) {
+        public double apply(double a, double b) {
             return a-b;
         }
     },
-    DIVIDE("/", 1) {
-        public int apply(int a, int b) {
+    DIVIDE("/", 2) {
+        public double apply(double a, double b) {
             return a/b;
         }
     },
     MULTIPLY("*", 2) {
-        public int apply(int a, int b) {
+        public double apply(double a, double b) {
             return a*b;
         }
     },
     POWER("^", 3) {
-        public int apply(int a, int b) {
-            return a^b;
+        public double apply(double a, double b) {
+            return Math.pow(a,b);
         }
     };
 
