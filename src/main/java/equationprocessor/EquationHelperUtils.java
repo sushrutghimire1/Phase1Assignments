@@ -35,7 +35,8 @@ public class EquationHelperUtils {
         for (char a : arr) {
             if (Character.isDigit(a) || Character.isLetter(a) || a == '(' || a == ')')
                 previousIsOperator = false;
-            if (!AllowedOperation.isAllowedOperation(a) && !Character.isDigit(a) && !Character.isLetter(a) && a != '(' && a != ')')
+            if (!AllowedOperation.isAllowedOperation(a) && !Character.isDigit(a) && !Character.isLetter(a)
+                    && a != '(' && a != ')')
                 return false;
             else if (AllowedOperation.isAllowedOperation(a)) {
                 if (previousIsOperator)
