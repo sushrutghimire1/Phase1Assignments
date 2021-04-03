@@ -1,7 +1,5 @@
 package passowordgenerator;
 
-
-import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -12,6 +10,7 @@ public class PasswordTest {
     @Test
     public void shouldThrowErrorWhenNotValid() {
         String random = passwordGenerator.generatePassword();
+        System.out.println(random);
         assertTrue(passwordGenerator.isValidPassword(random));
     }
 }

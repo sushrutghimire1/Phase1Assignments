@@ -47,7 +47,7 @@ public class EquationHelperUtils {
     }
 
     public static int getPrecedence(Character c) {
-        if (c == '(' || c == ')' || c == null) return 0;
+        if (c == '(' || c == ')') return 0;
         return AllowedOperation.toOperator(c.toString()).getPrecedence();
     }
 }

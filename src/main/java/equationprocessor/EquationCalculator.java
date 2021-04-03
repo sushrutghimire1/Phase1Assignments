@@ -25,7 +25,7 @@ public class EquationCalculator {
         char[] eqn = equation.toCharArray();
         for (int i = 0; i < eqn.length; i++)
             if (Character.isDigit(eqn[i]))
-                i = operateDigitAndGetPosition(eqn, i);
+                i = extractDigitsAndGetNextPosition(eqn, i);
             else if (eqn[i] == '(')
                 operations.push(eqn[i]);
             else if (eqn[i] == ')') {
@@ -42,7 +42,7 @@ public class EquationCalculator {
         return operands.pop();
     }
 
-    private int operateDigitAndGetPosition(char[] eqn, int i) {
+    private int extractDigitsAndGetNextPosition(char[] eqn, int i) {
         double num = 0;
         while (Character.isDigit(eqn[i])) {
             num = num * 10 + (Integer.parseInt(Character.toString(eqn[i])));
@@ -65,5 +65,4 @@ public class EquationCalculator {
         double b = operands.pop();
         operands.push(AllowedOperation.toOperator(operations.pop().toString()).apply(b, a));
     }
-
 }

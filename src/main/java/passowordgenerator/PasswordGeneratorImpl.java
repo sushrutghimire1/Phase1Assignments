@@ -14,14 +14,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
 
     @Override
     public String generatePassword() {
-        char[] password = new char[numberOfKeywords];
-        addRandomCharactersToMap(numberOfKeywords);
-        for (Map.Entry<Integer, Character> mapEntry : map.entrySet())
-            password[mapEntry.getKey()] = mapEntry.getValue();
-        return String.valueOf(password);
-    }
-
-    private void addRandomCharactersToMap(int numberOfKeywords) {
         Random random = new Random();
         int firstPosition, secondPosition;
         for (PasswordCharacters passwordCharacters : PasswordCharacters.values()) {
@@ -32,14 +24,26 @@ public class PasswordGeneratorImpl implements PasswordGenerator {
                         (secondPosition) % numberOfKeywords : secondPosition;
             }
             while (map.containsKey(firstPosition) || map.containsKey(secondPosition));
-
-            if (passwordCharacters.equals(PasswordCharacters.SYMBOLS))
-                putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.SYMBOLS.getCharacters());
-            if (passwordCharacters.equals(PasswordCharacters.NUMBERS))
-                putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.NUMBERS.getCharacters());
-            if (passwordCharacters.equals(PasswordCharacters.ALPHABETS))
-                putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.ALPHABETS.getCharacters());
+            addCharactersToPositionsRandomly(firstPosition, secondPosition, passwordCharacters);
         }
+
+        return getFinalPassword();
+    }
+
+    private String getFinalPassword() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, Character> mapEntry : map.entrySet())
+            builder.append(mapEntry.getValue());
+        return builder.toString();
+    }
+
+    private void addCharactersToPositionsRandomly(int firstPosition, int secondPosition, PasswordCharacters passwordCharacters) {
+        if (passwordCharacters.equals(PasswordCharacters.SYMBOLS))
+            putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.SYMBOLS.getCharacters());
+        if (passwordCharacters.equals(PasswordCharacters.NUMBERS))
+            putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.NUMBERS.getCharacters());
+        if (passwordCharacters.equals(PasswordCharacters.ALPHABETS))
+            putRandomCharacters(firstPosition, secondPosition, PasswordCharacters.ALPHABETS.getCharacters());
     }
 
     private void putRandomCharacters(int firstPosition, int secondPosition, String givenChars) {
