@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class PasswordGeneratorImpl implements PasswordGenerator {
+public class SixDigitPasswordGenerator implements PasswordGenerator {
     HashMap<Integer, Character> map;
     int numberOfKeywords = 6;
 
-    public PasswordGeneratorImpl() {
+    public SixDigitPasswordGenerator() {
         this.map = new HashMap<>();
     }
 
