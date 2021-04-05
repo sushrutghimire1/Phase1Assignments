@@ -5,10 +5,16 @@ import matrixutility.exceptions.MatrixDimensionInvalidException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.when;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class MatrixTest {
     private static MatrixUtils matrixUtils;
 
@@ -18,10 +24,15 @@ public class MatrixTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenTwoMatricesAreOfDifferentDimensionsWhileAdding() {
+    public void shouldBeEqualWhileMockingAddImplementation() {
+        MatrixUtils matrixUtils = Mockito.mock(MatrixUtilsImpl.class);
         int[][] matrix1 = {{1, 3, 1}, {1, 0, 0}};
         int[][] matrix2 = {{0, 5}, {7, 5}};
-        assertThrows(MatrixDimensionInvalidException.class, () -> matrixUtils.addMatrices(matrix1, matrix2));
+        int[][] resultant = {{1, 3, 6}, {8, 5, 0}};
+        matrixUtils.addMatrices(matrix1, matrix2);
+        Mockito.verify(matrixUtils).addMatrices(matrix1, matrix2);
+        when(matrixUtils.addMatrices(matrix1, matrix2)).thenReturn(resultant);
+        Assertions.assertEquals(matrixUtils.addMatrices(matrix1, matrix2), resultant);
     }
 
     @Test
@@ -110,7 +121,7 @@ public class MatrixTest {
     public void determinantMatrixShouldBeEqualToResultantMatrix() {
         double[][] matrix = {{16, 42, 3}, {4, 5, 6}, {7, 8, 19}};
         double resultant = -685;
-        Assert.assertEquals((int)resultant, (int)matrixUtils.getDeterminantOfMatrix(matrix));
+        Assert.assertEquals((int) resultant, (int) matrixUtils.getDeterminantOfMatrix(matrix));
     }
 
 }

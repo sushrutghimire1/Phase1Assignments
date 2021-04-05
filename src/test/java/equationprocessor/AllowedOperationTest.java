@@ -6,8 +6,13 @@ import org.junit.jupiter.api.Test;
 class AllowedOperationTest {
 
     @Test
-    void canInitValidPlusOperator() {
-        AllowedOperation allowedOperation = AllowedOperation.toOperator("-");
-        Assertions.assertEquals(AllowedOperation.MINUS, allowedOperation);
+    void canInitValidOperators() {
+        Assertions.assertAll("Validate Operators",
+                () -> Assertions.assertEquals(AllowedOperation.MINUS, AllowedOperation.toOperator("-")),
+                () -> Assertions.assertEquals(AllowedOperation.PLUS, AllowedOperation.toOperator("+")),
+                () -> Assertions.assertEquals(AllowedOperation.POWER, AllowedOperation.toOperator("^")),
+                () -> Assertions.assertEquals(AllowedOperation.DIVIDE, AllowedOperation.toOperator("/")),
+                () -> Assertions.assertEquals(AllowedOperation.MULTIPLY, AllowedOperation.toOperator("*"))
+        );
     }
 }

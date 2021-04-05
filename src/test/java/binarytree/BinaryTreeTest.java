@@ -3,8 +3,10 @@ package binarytree;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BinaryTreeTest {
 
@@ -15,8 +17,8 @@ public class BinaryTreeTest {
         binaryTree = new BinaryTreeImpl();
     }
 
-   @Test
-    public void testNode() {
+    @Test
+    public void testDepthOfBinaryTree() {
         binaryTree.accept(10);
         binaryTree.accept(6);
         binaryTree.accept(18);
@@ -30,7 +32,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void testDepth() {
+    public void testDepthOfValueInBinaryTree() {
         binaryTree.accept(10);
         binaryTree.accept(6);
         binaryTree.accept(18);
@@ -39,7 +41,22 @@ public class BinaryTreeTest {
         binaryTree.accept(15);
         binaryTree.accept(21);
 
-        int depth = binaryTree.depth(8);
-        assertEquals(3, depth);
+        int maxDepth = binaryTree.depth(4);
+        assertEquals(3, maxDepth);
     }
+
+    @Test
+    public void testAcceptingOfValues() {
+        Assertions.assertAll("acceptValues",
+                () -> assertTrue(binaryTree.accept(10)),
+                () -> assertTrue(binaryTree.accept(6)),
+                () -> assertTrue(binaryTree.accept(18)),
+                () -> assertTrue(binaryTree.accept(4)),
+                () -> assertTrue(binaryTree.accept(8)),
+                () -> assertTrue(binaryTree.accept(15)),
+                () -> assertTrue(binaryTree.accept(21))
+        );
+    }
+
+
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.RepeatedTest;
 public class PasswordTest {
     private final PasswordGenerator passwordGenerator = new SixDigitPasswordGenerator();
 
-    @RepeatedTest(10)
+    @RepeatedTest(100)
     @DisplayName("Password validation Test")
     public void shouldThrowErrorWhenNotValid() {
         String random = passwordGenerator.generatePassword();
